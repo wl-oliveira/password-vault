@@ -7,7 +7,7 @@ public class CryptoEngine {
     private static final int PBKDF2_ITERATIONS = 0;
     private static final int KEY_LENGTH_BITS = 0;
     private static final int SALT_LENGTH_BYTES = 16;
-    private static final int IV_LENGTH_BYTES = 0;
+    private static final int IV_LENGTH_BYTES = 12;
     private static final int GCM_TAG_LENGTH_BITS = 0;
 
     public static byte[] generateSalt() {
@@ -18,7 +18,10 @@ public class CryptoEngine {
     }
 
     public static byte[] generateIV() {
-        throw new UnsupportedOperationException("TODO: implementar geração de IV");
+        SecureRandom sr = new SecureRandom();
+        byte[] iv = new byte[IV_LENGTH_BYTES];
+        sr.nextBytes(iv);
+        return iv;
     }
 
     public static SecretKey deriveKey(char[] masterPassword, byte[] salt) throws Exception {
