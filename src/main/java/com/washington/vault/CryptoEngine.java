@@ -1,16 +1,20 @@
 package com.washington.vault;
 
 import javax.crypto.SecretKey;
+import java.security.SecureRandom;
 
 public class CryptoEngine {
     private static final int PBKDF2_ITERATIONS = 0;
     private static final int KEY_LENGTH_BITS = 0;
-    private static final int SALT_LENGTH_BYTES = 0;
+    private static final int SALT_LENGTH_BYTES = 16;
     private static final int IV_LENGTH_BYTES = 0;
     private static final int GCM_TAG_LENGTH_BITS = 0;
 
     public static byte[] generateSalt() {
-        throw new UnsupportedOperationException("TODO: implementar geração de salt");
+        SecureRandom sr = new SecureRandom();
+        byte[] salt = new byte[SALT_LENGTH_BYTES];
+        sr.nextBytes(salt);
+        return salt;
     }
 
     public static byte[] generateIV() {
